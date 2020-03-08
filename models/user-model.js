@@ -31,6 +31,18 @@ module.exports ={
 			}
 		});
 	},
+    getallstudent:function(callback){
+		var sql = "select * from student";
+		db.getResult(sql, null, function(results){
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback(null);
+			}
+		});
+	},
+
+
 	getAll:function(callback){
 		var sql = "select * from user";
 		db.getResult(sql, null, function(results){
