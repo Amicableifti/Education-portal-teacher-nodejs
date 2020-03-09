@@ -3,9 +3,28 @@ var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
 
 router.get('/', function(req, res){
-	console.log('course page requested!');
-	res.render('course/index');
+		console.log('course page requested!');
+	userModel.getallcourse(function(results){
+		if(results.length > 0){
+					console.log(results);
+
+			res.render('course/index', {userlist: results});
+		}else{
+			res.send('invalid username/password');
+		}
+	});
 });
+
+router.get('/viewallcourse', function(req, res){
+	userModel.getallcourse(function(results){
+		if(results.length > 0){
+			res.render('course/viewallcourse', {userlist: results});
+		}else{
+			res.send('invalid username/password');
+		}
+	});
+})
+
 
 router.post('/', function(req, res){
 		

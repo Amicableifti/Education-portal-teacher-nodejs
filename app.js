@@ -21,8 +21,8 @@ app.set('view engine', 'ejs');
 
 //middleware
 
-app.use('/abc', express.static('xyz'));
-app.use('/abc', express.static('xyz'));
+app.use('/abc', express.static('css'));
+app.use('/abc', express.static('css'));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(exSession({secret: 'my top secret value', saveUninitialized: true, resave: false}));

@@ -3,7 +3,7 @@ var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
 
 router.get('/', function(req, res){
-	console.log('course page requested!');
+	console.log('student page requested!');
 	userModel.getallstudent(function(results){
 		if(results.length > 0){
 			console.log(results);
@@ -17,6 +17,7 @@ router.get('/', function(req, res){
 router.get('/viewallstudent', function(req, res){
 	userModel.getallstudent(function(results){
 		if(results.length > 0){
+			console.log(results);
 			console.log(results);
 			res.render('student/viewallstudent', { userlist: results});
 		}else{
@@ -33,6 +34,29 @@ router.get('/result', function(req, res){
 		}
 	});
 })
+router.get('/givemark/:id', function(req, res){
+	
+	userModel.getBySid(req.params.id, function(result){
+		res.render('student/givemark', {user: result});
+	});
+})
+router.post('/givemark/:id', function(req, res){
+	
+	var mark = {
+		result: req.body.result,
+		id: req.params.id
+	};
+
+	userModel.update(mark, function(status){
+		if(status){
+			res.redirect('/student/viewallstudent');
+		}else{
+			res.redirect('/student/givemark/'+req.params.id);
+		}
+	});
+})
+
+
 
 module.exports = router;
 

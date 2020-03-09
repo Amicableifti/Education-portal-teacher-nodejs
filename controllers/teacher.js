@@ -3,12 +3,19 @@ var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
 
 router.get('/', function(req, res){
-	console.log('Teacher page requested!');
-	res.render('teacher/index');
+			console.log('course page requested!');
+	userModel.getallcourse(function(results){
+		console.log(results);
+		if(results.length > 0){
+			res.render('teacher/index', {userlist: results});
+		}else{
+			res.send('invalid username/password');
+		}
+	});
 });
 
 router.get('/viewallstudent', function(req, res){
-	userModel.getAll(function(results){
+	userModel.getByCid(function(results){
 		if(results.length > 0){
 			res.render('student/viewallstudent', {userlist: results});
 		}else{
@@ -16,10 +23,21 @@ router.get('/viewallstudent', function(req, res){
 		}
 	});
 })
+
 router.get('/profile', function(req, res){
-	userModel.getAll(function(results){
+	userModel.getprofile(function(results){
+		console.log(results);
 		if(results.length > 0){
 			res.render('teacher/profile', {userlist: results});
+		}else{
+			res.send('invalid username/password');
+		}
+	});
+})
+router.get('/editprofile', function(req, res){
+	userModel.getAll(function(results){
+		if(results.length > 0){
+			res.render('teacher/editprofile', {userlist: results});
 		}else{
 			res.send('invalid username/password');
 		}

@@ -29,10 +29,10 @@ router.get('/alluser', function(req, res){
 		}
 	});
 })
-router.get('/edit', function(req, res){
+router.get('/editprofile', function(req, res){
 	userModel.getAll(function(results){
 		if(results.length > 0){
-			res.render('home/edit', {userlist: results});
+			res.render('teacher/editprofile', {userlist: results});
 		}else{
 			res.send('invalid username/password');
 		}
