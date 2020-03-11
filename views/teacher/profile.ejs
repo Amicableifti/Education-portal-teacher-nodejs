@@ -63,7 +63,7 @@
               class="dropdown-menu dropdown-menu-right"
               aria-labelledby="navbarDropdown"
             >
-              <a class="dropdown-item" href="../teacher/changepassword">Change Password</a>
+              <a class="dropdown-item" href="../teacher/editprofile">Change Password</a>
               <a class="dropdown-item" href="#">Available</a>
               <a class="dropdown-item" href="#">Not Available</a>
 
@@ -152,44 +152,40 @@
                     <div class="card-body">
                      <h5 class="card-title">View PROFILE</h5>
    <form>
-    <% for(var i=0; i < userlist.length; i++){ %>
-
  <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">Id</label>
     <div class="col-sm-10">
-    <%= userlist[i].id %>
+    <%= user.id %>
     </div>
   </div>
   <div class="form-group row">
     <label  class="col-sm-2 col-form-label">Full Name</label>
-    <div class="col-sm-10"><%= userlist[i].fullname %>
+    <div class="col-sm-10"><%= user.name %>
     </div>
   </div>
   <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">User Id</label>
-    <div class="col-sm-10"><%= userlist[i].userid %>
+    <div class="col-sm-10"><%= user.username %>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10"><%= userlist[i].password %>
+    <div class="col-sm-10"><%= user.password %>
     </div>
   </div>
    <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10"><%= userlist[i].email %>
+    <div class="col-sm-10"><%= user.email %>
      
   </div>
 </div>
 <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Type</label>
-    <div class="col-sm-10"><%= userlist[i].type %>
+    <div class="col-sm-10"><%= user.type %>
      
   </div>
 </div>
 
-
-     <% } %>
 </form>
    
 

@@ -44,7 +44,7 @@
       <th scope="col">Credit Complete</th>
       <th scope="col">Cgpa</th>
       <th scope="col">Give Mark</th>
-      <th scope="col">Action</th>
+      <th scope="col">contact student</th>
      <!-- <th scope="col">Cgpa</th>-->
 
     </tr>
@@ -63,7 +63,7 @@
       <td><%= userlist[i].cgpa %></td>
       <td>
          <a href="/student/givemark/<%= userlist[i].id %>">Give mark</a>
-         <td><a href="">Contact Student</a></td>
+      <td><%= userlist[i].email %></td>
          
       </td>
    

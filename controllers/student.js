@@ -1,6 +1,13 @@
 var express 	= require('express');
 var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
+router.get('*', function(req, res, next){
+	if(req.cookies['username'] == null){
+		res.redirect('/login');
+	}else{
+		next();
+	}
+});
 
 router.get('/', function(req, res){
 	console.log('student page requested!');
@@ -25,6 +32,19 @@ router.get('/viewallstudent', function(req, res){
 		}
 	});
 })
+router.get('/allresult', function(req, res){
+	userModel.getallresult(function(results){
+					console.log(results);
+
+		if(results.length > 0){
+			console.log(results);
+			console.log(results);
+			res.render('student/allresult', { userlist: results});
+		}else{
+			res.send('invalid username/password');
+		}
+	});
+})
 router.get('/result', function(req, res){
 	userModel.getAll(function(results){
 		if(results.length > 0){
@@ -34,6 +54,7 @@ router.get('/result', function(req, res){
 		}
 	});
 })
+//-------give mark-----
 router.get('/givemark/:id', function(req, res){
 	
 	userModel.getBySid(req.params.id, function(result){
@@ -51,11 +72,10 @@ router.post('/givemark/:id', function(req, res){
 		if(status){
 			res.redirect('/student/viewallstudent');
 		}else{
-			res.redirect('/student/givemark/'+req.params.id);
+			res.redirect('/student/givemark/'+id);
 		}
 	});
 })
-
 
 
 module.exports = router;

@@ -4,14 +4,17 @@ var bodyParser 		= require('body-parser');
 var ejs 			= require('ejs');
 var exSession 		= require('express-session');
 var cookieParser 	= require('cookie-parser');
+//var multer  = require('multer');
 var login 			= require('./controllers/login');
 var logout 			= require('./controllers/logout');
-var home 			= require('./controllers/home');
+//var home 			= require('./controllers/home');
 var course          = require('./controllers/course');
 var student          = require('./controllers/student');
 var teacher         = require('./controllers/teacher');
 
 
+ 
+//var app = express()
 
 var app = express();
 
@@ -29,7 +32,6 @@ app.use(exSession({secret: 'my top secret value', saveUninitialized: true, resav
 app.use(cookieParser());
 app.use('/login', login);
 app.use('/logout', logout);
-app.use('/home', home);
 app.use('/course', course);
 app.use('/student', student);
 app.use('/teacher', teacher);

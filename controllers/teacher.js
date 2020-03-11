@@ -1,11 +1,17 @@
 var express 	= require('express');
 var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
-
+router.get('*', function(req, res, next){
+	if(req.cookies['username'] == null){
+		res.redirect('/login');
+	}else{
+		next();
+	}
+});
 router.get('/', function(req, res){
-			console.log('course page requested!');
+			console.log('teacher page requested!');
 	userModel.getallcourse(function(results){
-		console.log(results);
+	
 		if(results.length > 0){
 			res.render('teacher/index', {userlist: results});
 		}else{
@@ -25,48 +31,91 @@ router.get('/viewallstudent', function(req, res){
 })
 
 router.get('/profile', function(req, res){
-	userModel.getprofile(function(results){
-		console.log(results);
-		if(results.length > 0){
-			res.render('teacher/profile', {userlist: results});
+	if(req.cookies['username'] != null){
+console.log(req.cookies['username']);
+		userModel.getByTUname(req.cookies['username'], function(result){
+			res.render('teacher/profile', {user: result});
+		});
+	}else{
+		res.redirect('/logout');
+	}
+});
+//-------------------edit profile
+router.get('/editprofile/', function(req, res){
+	
+	userModel.getByTUname(req.cookies['username'], function(result){
+		console.log(result);
+		res.render('teacher/editprofile', {user: result});
+	});
+})
+router.post('/editprofile', function(req, res){
+	
+	var user = {
+		name :req.body.name,
+		password : req.body.password,
+		email : req.body.email,
+		type :req.body.type,
+		id:req.body.id
+	};
+
+	userModel.updateprofile(user, function(status){
+		if(status){
+			res.redirect('/teacher/profile');
 		}else{
-			res.send('invalid username/password');
+			res.redirect('/teacher/editprofile/');
 		}
 	});
 })
-router.get('/editprofile', function(req, res){
-	userModel.getAll(function(results){
-		if(results.length > 0){
-			res.render('teacher/editprofile', {userlist: results});
-		}else{
-			res.send('invalid username/password');
-		}
-	});
-})
+
+
+//----------------------------------------------------------//-------------
+
+//change password
+
 router.get('/changepassword', function(req, res){
-	userModel.getAll(function(results){
-		if(results.length > 0){
-			res.render('teacher/changepassword', {userlist: results});
+	
+	userModel.getByTUname(req.cookies['username'], function(result){
+		console.log(result);
+		res.render('teacher/changepassword', {user: result});
+	});
+})
+router.post('/changepassword', function(req, res){
+	
+	var user = {
+		name :req.body.name,
+		password: req.body.password,
+		id: req.body.id
+	};
+
+	userModel.updatepassword(user, function(status){
+		if(status){
+			res.redirect('/teacher/profile');
 		}else{
-			res.send('invalid username/password');
+			res.redirect('/teacher/changepassword');
 		}
 	});
 })
-router.get('/upload', function(req, res){
-	userModel.getAll(function(results){
-		if(results.length > 0){
-			res.render('teacher/upload', {userlist: results});
-		}else{
-			res.send('invalid username/password');
-		}
+router.get('/upload/:cid', function(req, res){
+	
+	userModel.getByCid(req.params.cid, function(result){
+				console.log(result);
+
+		res.render('teacher/upload', {user: result});
 	});
 })
-router.get('/result', function(req, res){
-	userModel.getAll(function(results){
-		if(results.length > 0){
-			res.render('student/result', {userlist: results});
+
+router.post('/upload/:cid', function(req, res){
+	
+	var user = {
+		notice: req.body.upload,
+		cid: req.params.cid
+	};
+
+	userModel.updatenotice(user, function(status){
+		if(status){
+			res.redirect('/teacher');
 		}else{
-			res.send('invalid username/password');
+			res.redirect('/student/givemark/'+cid);
 		}
 	});
 })

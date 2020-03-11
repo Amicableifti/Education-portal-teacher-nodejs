@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2020 at 08:38 PM
+-- Generation Time: Mar 10, 2020 at 05:58 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -21,6 +21,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `portal`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `action`
+--
+
+CREATE TABLE `action` (
+  `id` varchar(5) NOT NULL,
+  `action` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `action`
+--
+
+INSERT INTO `action` (`id`, `action`) VALUES
+('1', 'AVAILABLE'),
+('2', 'NOT AVAILABLE');
 
 -- --------------------------------------------------------
 
@@ -59,39 +78,19 @@ CREATE TABLE `student` (
   `section` varchar(15) NOT NULL,
   `result` varchar(15) NOT NULL,
   `creditcomplete` varchar(20) NOT NULL,
-  `cgpa` varchar(20) NOT NULL
+  `cgpa` varchar(20) NOT NULL,
+  `email` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`no`, `id`, `name`, `cname`, `section`, `result`, `creditcomplete`, `cgpa`) VALUES
-(1, '17-34013-1', 'Nur,iftikharul Faridee', 'Artificial Intelligence', 'F', '00', '115', '3.81'),
-(2, '17-34014-1', 'NUR', 'Engineering Mangement', 'F', '80', '12', '3.3'),
-(3, '17-34015-1', 'SHOILY', 'ENGINEERING MANAGEMENT', 'G', '00', '122', '3.61');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `teacher`
---
-
-CREATE TABLE `teacher` (
-  `id` int(5) NOT NULL,
-  `fullname` varchar(50) NOT NULL,
-  `userid` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `type` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `teacher`
---
-
-INSERT INTO `teacher` (`id`, `fullname`, `userid`, `password`, `email`, `type`) VALUES
-(2, 'Alamin', 'alamin', 'alamin', 'amicableifti@gmail.com', 'teacher');
+INSERT INTO `student` (`no`, `id`, `name`, `cname`, `section`, `result`, `creditcomplete`, `cgpa`, `email`) VALUES
+(1, '17-34013-1', 'Nur,iftikharul Faridee', 'Artificial Intelligence', 'F', '00', '115', '3.81', ''),
+(2, '17-34014-1', 'NUR', 'Engineering Mangement', 'F', '80', '12', '3.3', ''),
+(3, '17-34015-1', 'SHOILY', 'ENGINEERING MANAGEMENT', 'G', '00', '122', '3.61', ''),
+(4, '18-34444-1', 'Ifti', 'ARTIFICIAL INTELEGENCE', 'F', '00', '22', '3.81', 'amicableifti@gmail.c');
 
 -- --------------------------------------------------------
 
@@ -101,8 +100,10 @@ INSERT INTO `teacher` (`id`, `fullname`, `userid`, `password`, `email`, `type`) 
 
 CREATE TABLE `user` (
   `id` int(5) NOT NULL,
+  `name` varchar(20) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(30) NOT NULL,
+  `email` varchar(20) NOT NULL,
   `type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -110,8 +111,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `type`) VALUES
-(1, 'ifti', 'ifti', 'user');
+INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `type`) VALUES
+(1, 'Ifti', 'ifti', 'ifti', 'amicableifti@gmail.c', 'teacher'),
+(2, 'Ifti', 'alamin', 'alamin', 'amicableifti@gmail.c', 'teacher');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
