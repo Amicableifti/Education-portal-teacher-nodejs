@@ -28,8 +28,8 @@
       <button class="navbar-toggler sideMenuToggler" type="button">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <a class="navbar-brand" href="/teacher">E. Portal</a>
+             <a class="navbar-brand" href="/teacher">E. Portal</a>
+      <button type="button" class="btn btn-<%= user.status %>">Teacher online Status</button>
       <button
         class="navbar-toggler"
         type="button"
@@ -64,9 +64,7 @@
               aria-labelledby="navbarDropdown"
             >
               <a class="dropdown-item" href="../teacher/editprofile">Change Password</a>
-              <a class="dropdown-item" href="#">Available</a>
-              <a class="dropdown-item" href="#">Not Available</a>
-
+              <a class="dropdown-item" href="../teacher/changestatus">Change Status</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Logout</a>
             </div>

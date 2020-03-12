@@ -16,7 +16,7 @@ router.get('*', function(req, res, next){
 	}
 });
 router.get('/', function(req, res){
-			console.log('teacher page requested!');
+	console.log('teacher page requested!');
 	userModel.getallcourse(function(results){
 	
 		if(results.length > 0){
@@ -27,26 +27,19 @@ router.get('/', function(req, res){
 	});
 });
 
-router.get('/viewallstudent', function(req, res){
-	userModel.getallupload(function(results){
-		if(results.length > 0){
-			res.render('student/viewallstudent', {userlist: results});
-		}else{
-			res.send('invalid username/password');
-		}
-	});
-})
 //all notice view
 router.get('/profile', function(req, res){
 	if(req.cookies['username'] != null){
 console.log(req.cookies['username']);
 		userModel.getByTUname(req.cookies['username'], function(result){
 			res.render('teacher/profile', {user: result});
+
 		});
 	}else{
 		res.redirect('/logout');
 	}
 });
+//status
 //-------------------edit profile
 
 
@@ -102,6 +95,32 @@ console.log(user);
 		}
 	});
 })
+// change status
+router.get('/changestatus', function(req, res){
+	
+	userModel.getByTUname(req.cookies['username'], function(result){
+	
+		res.render('teacher/changestatus', {user: result});
+	});
+})
+router.post('/changestatus', function(req, res){
+	
+	var user = {
+		password: req.body.password,
+		uname: req.cookies['username']
+	};
+console.log(user);
+	userModel.updatestatus(user, function(status){
+		if(status){
+			res.redirect('/teacher/profile');
+		}else{
+			res.redirect('/teacher/changepassword');
+		}
+	});
+})
+
+
+
 
 router.get('/upload/:cid', function(req, res){
 	
@@ -119,7 +138,7 @@ router.post('/upload/:cid', function(req, res){
 	};
 	userModel.insertnotice(user, function(status){
 		if(status){
-			res.redirect('/teacher');
+			res.redirect('../../course/allnotice');
 		}else{
 			res.redirect('/student/upload/'+id);
 		}

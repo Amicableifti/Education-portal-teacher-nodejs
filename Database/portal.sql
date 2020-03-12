@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2020 at 12:42 PM
+-- Generation Time: Mar 12, 2020 at 09:21 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
 
@@ -91,12 +91,13 @@ CREATE TABLE `upload` (
 --
 
 INSERT INTO `upload` (`no`, `cid`, `notice`) VALUES
-(1, '1112', 'fv gfv'),
-(2, '1112', 'tb5ynbyrby5revt4'),
-(3, '1212', 'WGSHRRN'),
-(4, '1112', 'hEY HOW aRE you BOY?'),
-(5, '1112', 'fewghtrym,.li/;/po,uymthrgeffrgtnhyjuki'),
-(6, '1112', '4gt4b5tb5y');
+(1, '1112', 'TOMORROE CALL WILL BE CANCEL.'),
+(2, '1212', 'Tomorrow i will se your peoject proposal.'),
+(3, '1212', 'Hew how are you?'),
+(4, '1112', 'Hey lets chill baby..'),
+(5, '1112', 'Go to the class.'),
+(6, '1112', 'Go to the class.'),
+(7, '1112', 'Go to the class.');
 
 -- --------------------------------------------------------
 
@@ -110,16 +111,16 @@ CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
   `password` varchar(30) NOT NULL,
   `email` varchar(20) NOT NULL,
-  `type` varchar(30) NOT NULL
+  `type` varchar(30) NOT NULL,
+  `status` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `type`) VALUES
-(1, 'Iftikharu Faridee Nu', 'ifti', 'ifti', 'abc@gmail.com', 'teacher'),
-(2, 'Ifti', 'alamin', 'alamin', 'amicableifti@gmail.c', 'teacher');
+INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `type`, `status`) VALUES
+(1, 'Ifti', 'ifti', 'ifti', 'amicable@gmail.com', 'teacher', 'danger');
 
 --
 -- Indexes for dumped tables
@@ -145,7 +146,7 @@ ALTER TABLE `upload`
 -- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

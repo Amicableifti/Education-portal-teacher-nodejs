@@ -147,6 +147,16 @@ module.exports ={
 			}
 		});
 	},
+	updatestatus: function(user, callback){
+		var sql = "update user set status=? where username=?";
+		db.execute(sql, [user.password,user.uname], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
 	updatepassword: function(user, callback){
 		var sql = "update user set password=? where username=?";
 		db.execute(sql, [user.password,user.uname], function(status){
@@ -179,9 +189,6 @@ module.exports ={
 			}
 		});
 	},
-
-
-
 
 	updatenotice: function(user, callback){
 		var sql = "update student set ntitle=?,notice=? where id=?";
