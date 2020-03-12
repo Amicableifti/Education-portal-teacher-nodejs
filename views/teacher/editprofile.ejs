@@ -156,38 +156,38 @@
  <div  class="form-group row">
     <label for="" class="col-sm-2 col-form-label">Id</label>
     <div class="col-sm-10">
-      <input type="" readonly name="id" value="<%= user.id %>" class="form-control" id="">
+      <input type="" required="required" readonly name="id" value="<%= user.id %>" class="form-control" id="">
     </div>
   </div>
   <div class="form-group row">
     <label  class="col-sm-2 col-form-label">Full Name</label>
     <div class="col-sm-10">
-      <input type="" value="<%= user.name %>" name="name"class="form-control" id="">
+      <input type="" required="required" value="<%= user.name %>" name="name"class="form-control" id="">
     </div>
   </div>
   <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">User Id</label>
     <div class="col-sm-10">
-      <input type="" readonly  value="<%= user.username %>" class="form-control" id="">
+      <input type="" readonly required="required"  value="<%= user.username %>" class="form-control" id="">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
-      <input type="" value="<%= user.password %>" name="password" class="form-control" id="inputPassword3">
+      <input type="password" value="<%= user.password %>" required="required" name="password" class="form-control" id="inputPassword3">
     </div>
   </div>
   
    <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" value="<%= user.email %>" name="email" class="form-control" id="inputEmail3">
+      <input type="email" required="required" value="<%= user.email %>" name="email" class="form-control" id="inputEmail3">
     </div>
   </div>
   <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">Type</label>
     <div class="col-sm-10">
-      <input type="" value="<%= user.type %>" name="type" class="form-control" id="">
+      <input type="" required="required" value="<%= user.type %>" name="type" class="form-control" id="">
     </div>
   </div>
   <div class="form-group row">

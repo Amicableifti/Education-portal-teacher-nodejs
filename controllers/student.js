@@ -58,6 +58,7 @@ router.get('/result', function(req, res){
 router.get('/givemark/:id', function(req, res){
 	
 	userModel.getBySid(req.params.id, function(result){
+		console.log(req.params.id);
 		res.render('student/givemark', {user: result});
 	});
 })
@@ -77,6 +78,28 @@ router.post('/givemark/:id', function(req, res){
 	});
 })
 
-
+router.get('/contact/:id', function(req, res){
+	
+	userModel.getBySid(req.params.id, function(result){
+		console.log(req.params.id);
+		res.render('student/contact', {user: result});
+	});
+})
+router.post('/contact/:id', function(req, res){
+	
+	var user = {
+		ntitle: req.body.ntitle,
+		notice: req.body.notice,
+		id: req.body.id
+	};
+console.log(user);
+	userModel.updatenotice(user, function(status){
+		if(status){
+			res.redirect('/student');
+		}else{
+			res.redirect('/student/contact/'+id);
+		}
+	});
+})
 module.exports = router;
 

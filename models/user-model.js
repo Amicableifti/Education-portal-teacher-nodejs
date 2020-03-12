@@ -11,6 +11,26 @@ module.exports ={
 			}
 		});
 	},
+	getallupload: function(id, callback){
+		var sql = "select * from upload";
+		db.getResult(sql, null, function(results){
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback(null);
+			}
+		});
+	},
+	getupload: function(cid, callback){
+		var sql = "select * from student where cid=?";
+		db.getResult(sql, [cid], function(result){
+			if(result.length > 0){
+				callback(result[0]);
+			}else{
+				callback(null);
+			}
+		});
+	},
 	getallresult: function(id, callback){
 		var sql = "select * from result";
 		db.getResult(sql, [id], function(result){
@@ -31,6 +51,27 @@ module.exports ={
 			}
 		});
 	},
+	getByCid: function(cid, callback){
+		var sql = "select * from course where cid=?";
+		db.getResult(sql, [cid], function(result){
+			if(result.length > 0){
+				callback(result[0]);
+			}else{
+				callback(null);
+			}
+		});
+	},
+	getBySemail: function(email, callback){
+		var sql = "select * from student where email=?";
+		db.getResult(sql, [email], function(result){
+			if(result.length > 0){
+				callback(result[0]);
+			}else{
+				callback(null);
+			}
+		});
+	},
+    
     
 	getByTUname: function(uname, callback){
 		var sql = "select * from user where username=?";
@@ -53,7 +94,7 @@ module.exports ={
 			}
 		});
 	},
-	//teacher all information
+	//course all information
 	getallcourse:function(callback){
 		var sql = "select * from course";
 		db.getResult(sql, null, function(results){
@@ -64,16 +105,7 @@ module.exports ={
 			}
 		});
 	},
-	getByCid: function(cid, callback){
-		var sql = "select * from course where cid=?";
-		db.getResult(sql, [cid], function(result){
-			if(result.length > 0){
-				callback(result[0]);
-			}else{
-				callback(null);
-			}
-		});
-	},
+	
     getallstudent:function(callback){
 		var sql = "select * from student";
 		db.getResult(sql, null, function(results){
@@ -106,8 +138,8 @@ module.exports ={
 		});
 	},
 	updatepassword: function(user, callback){
-		var sql = "update user set password=? where id=?";
-		db.execute(sql, [user.password,user.id], function(status){
+		var sql = "update user set password=? where username=?";
+		db.execute(sql, [user.password,user.uname], function(status){
 			if(status){
 				callback(true);
 			}else{
@@ -125,6 +157,32 @@ module.exports ={
 			}
 		});
 	},
+    //insert alll
+    insertnotice: function(user, callback){
+		var sql = "insert into upload values(?,?,?)";
+
+		db.execute(sql, [null,user.cid,user.notice], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
+
+
+
+
+	updatenotice: function(user, callback){
+		var sql = "update student set ntitle=?,notice=? where id=?";
+		db.execute(sql, [user.ntitle,user.notice,user.id], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
 	update: function(user, callback){
 		var sql = "update student set  result=? where id=?";
 		db.execute(sql, [user.result, user.id], function(status){
@@ -134,28 +192,6 @@ module.exports ={
 				callback(false);
 			}
 		});
-	},
-	updatenotice: function(user, callback){
-		var sql = "update course set  notice=? where cid=?";
-		db.execute(sql, [user.notice, user.cid], function(status){
-			if(status){
-				callback(true);
-			}else{
-				callback(false);
-			}
-		});
 	}
-
-	//updatemark: function(user, callback){
-	//	var sql = "update user set no=?,id=?,name=?,cname=?,section=?,result=?,creditcomplete=?,cgpa=? where id=?";
-	//	db.execute(sql, [, user.password, user.type, user.id], function(status){
-	//		if(status){
-		//		callback(true);
-	//		}else{
-	//			callback(false);
-	//		}
-	//	});
-	//}
-	
 	
 }

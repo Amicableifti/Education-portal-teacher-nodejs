@@ -1,6 +1,13 @@
 var express 	= require('express');
 var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
+const { check, validationResult } = require('express-validator');
+
+
+
+
+
+
 router.get('*', function(req, res, next){
 	if(req.cookies['username'] == null){
 		res.redirect('/login');
@@ -21,7 +28,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/viewallstudent', function(req, res){
-	userModel.getByCid(function(results){
+	userModel.getallupload(function(results){
 		if(results.length > 0){
 			res.render('student/viewallstudent', {userlist: results});
 		}else{
@@ -29,7 +36,7 @@ router.get('/viewallstudent', function(req, res){
 		}
 	});
 })
-
+//all notice view
 router.get('/profile', function(req, res){
 	if(req.cookies['username'] != null){
 console.log(req.cookies['username']);
@@ -41,14 +48,20 @@ console.log(req.cookies['username']);
 	}
 });
 //-------------------edit profile
-router.get('/editprofile/', function(req, res){
-	
+
+
+router.get('/editprofile/',function(req, res){
+		var errors = validationResult(req);
 	userModel.getByTUname(req.cookies['username'], function(result){
-		console.log(result);
 		res.render('teacher/editprofile', {user: result});
 	});
 })
-router.post('/editprofile', function(req, res){
+router.post('/editprofile',[check('name', 'Name is required').isEmpty(),
+	check('username', 'Username is required').isEmpty(),
+  check('password', 'Pssword is required').isEmpty().isLength({min: 5}),
+  check('email', 'Email is required').isEmpty(),
+  check('type', 'Type is required').isEmpty()]
+ ,function(req, res){
 	
 	var user = {
 		name :req.body.name,
@@ -57,7 +70,6 @@ router.post('/editprofile', function(req, res){
 		type :req.body.type,
 		id:req.body.id
 	};
-
 	userModel.updateprofile(user, function(status){
 		if(status){
 			res.redirect('/teacher/profile');
@@ -66,27 +78,22 @@ router.post('/editprofile', function(req, res){
 		}
 	});
 })
-
-
-//----------------------------------------------------------//-------------
-
-//change password
+//pass-word change
 
 router.get('/changepassword', function(req, res){
 	
 	userModel.getByTUname(req.cookies['username'], function(result){
-		console.log(result);
+	
 		res.render('teacher/changepassword', {user: result});
 	});
 })
 router.post('/changepassword', function(req, res){
 	
 	var user = {
-		name :req.body.name,
 		password: req.body.password,
-		id: req.body.id
+		uname: req.cookies['username']
 	};
-
+console.log(user);
 	userModel.updatepassword(user, function(status){
 		if(status){
 			res.redirect('/teacher/profile');
@@ -95,30 +102,28 @@ router.post('/changepassword', function(req, res){
 		}
 	});
 })
+
 router.get('/upload/:cid', function(req, res){
 	
 	userModel.getByCid(req.params.cid, function(result){
-				console.log(result);
 
 		res.render('teacher/upload', {user: result});
-	});
+	})
+	
 })
-
 router.post('/upload/:cid', function(req, res){
 	
 	var user = {
-		notice: req.body.upload,
+		notice: req.body.notice,
 		cid: req.params.cid
 	};
-
-	userModel.updatenotice(user, function(status){
+	userModel.insertnotice(user, function(status){
 		if(status){
 			res.redirect('/teacher');
 		}else{
-			res.redirect('/student/givemark/'+cid);
+			res.redirect('/student/upload/'+id);
 		}
 	});
 })
-
 module.exports = router;
 

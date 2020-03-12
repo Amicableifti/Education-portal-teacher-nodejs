@@ -2,9 +2,9 @@
 var express 		= require('express');
 var bodyParser 		= require('body-parser');
 var ejs 			= require('ejs');
+var expressValidator =require('express-validator');
 var exSession 		= require('express-session');
-var cookieParser 	= require('cookie-parser');
-//var multer  = require('multer');
+var cookieParser 	= require('cookie-parser');//var multer  = require('multer');
 var login 			= require('./controllers/login');
 var logout 			= require('./controllers/logout');
 //var home 			= require('./controllers/home');
