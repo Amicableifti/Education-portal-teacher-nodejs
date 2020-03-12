@@ -18,7 +18,7 @@
       integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="abc/css/style.css" />
+    <link rel="stylesheet" href="../abc/css/style.css" />
   </head>
 
   <body>
@@ -198,31 +198,28 @@
                  Courses
                  </div>
                     <div class="card-body">
-                     <h5 class="card-title"> <a href="course/allnotice" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">All notice</a></h5>
+                     <h5 class="card-title">All notice</h5>
                        <table class="table table-dark">
   <thead>
     <tr>
       <th scope="col">Number</th>
-            <th scope="col">Course Id</th>
-      <th scope="col">Course Name</th>
-      <th scope="col">Sction </th>
-      <th scope="col">Time</th>
+      <th scope="col">Course Id</th>
+      <th scope="col">Notice</th>
+      <th scope="col">Note</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
      <% for(var i=0; i < userlist.length; i++){ %>
     <tr>
-      <td><%= userlist[i].number %></td>
+      <td><%= userlist[i].no %></td>
      <td><%= userlist[i].cid %></td>
-      <td><%= userlist[i].cname %></td>
-      <td><%= userlist[i].csection %></td>
-       <td><%= userlist[i].ctime %></td>
-     
+      <td><%= userlist[i].notice %></td>
+       <td>UPLOAD</td>
       <td>
-        <!--<a href="/home/edit/<%= userlist[i].id %>">EDIT</a> | 
-        <a href="/home/delete/<%= userlist[i].id %>">DELETE</a>  -->
-      </td>
-   
+       <!-- <a href="/home/edit/<%= userlist[i].cid %>">EDIT</a> | 
+        <a href="/home/delete/<%= userlist[i].cid %>">DELETE</a>  -->
+       <a href="">DELETE</a>      </td>
      <% } %>
   </tbody>
 </table>

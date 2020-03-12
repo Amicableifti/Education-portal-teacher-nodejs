@@ -105,6 +105,16 @@ module.exports ={
 			}
 		});
 	},
+	getallnotice:function(callback){
+		var sql = "select * from upload";
+		db.getResult(sql, null, function(results){
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback(null);
+			}
+		});
+	},
 	
     getallstudent:function(callback){
 		var sql = "select * from student";

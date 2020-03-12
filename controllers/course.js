@@ -31,6 +31,16 @@ router.get('/viewallcourse', function(req, res){
 		}
 	});
 })
+router.get('/allnotice', function(req, res){
+	userModel.getallnotice(function(results){
+		if(results.length > 0){
+			console.log(results);
+			res.render('course/allnotice', {userlist: results});
+		}else{
+			res.send('invalid username/password');
+		}
+	});
+})
 
 
 router.post('/', function(req, res){

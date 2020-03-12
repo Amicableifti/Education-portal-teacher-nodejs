@@ -106,7 +106,7 @@ console.log(user);
 router.get('/upload/:cid', function(req, res){
 	
 	userModel.getByCid(req.params.cid, function(result){
-
+  console.log(result);
 		res.render('teacher/upload', {user: result});
 	})
 	
