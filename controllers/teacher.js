@@ -40,6 +40,18 @@ console.log(req.cookies['username']);
 	}
 });
 //status
+
+router.get('/routine', function(req, res){
+	userModel.getallstudent(function(results){
+		if(results.length > 0){
+			console.log(results);
+			console.log(results);
+			res.render('teacher/routine', { userlist: results});
+		}else{
+			res.send('invalid username/password');
+		}
+	});
+})
 //-------------------edit profile
 
 

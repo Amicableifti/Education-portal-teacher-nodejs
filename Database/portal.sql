@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2020 at 09:21 PM
+-- Generation Time: Mar 13, 2020 at 10:54 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
 
@@ -71,7 +71,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`no`, `id`, `name`, `cname`, `section`, `result`, `creditcomplete`, `cgpa`, `email`, `ntitle`, `notice`) VALUES
-(1, '17-34013-1', 'Iftikharul faridee Nur', 'ARTIFICIAL INTELEGENCE', 'F', '70', '333', '3.81', 'amicableifti@gmail.com', 'Quiz time', 'Come at 9:am'),
+(1, '17-34013-1', 'Iftikharul faridee Nur', 'ARTIFICIAL INTELEGENCE', 'F', '70', '333', '3.81', 'amicableifti@gmail.com', 'Drop prposal!', 'Drop paper accepted,check it.'),
 (2, '17-3333-1', 'SHOILY', 'COMPUTER NETWORK', 'G', '00', '123', '3.55', 'abc@gmail.com', '--', '--');
 
 -- --------------------------------------------------------
@@ -95,9 +95,7 @@ INSERT INTO `upload` (`no`, `cid`, `notice`) VALUES
 (2, '1212', 'Tomorrow i will se your peoject proposal.'),
 (3, '1212', 'Hew how are you?'),
 (4, '1112', 'Hey lets chill baby..'),
-(5, '1112', 'Go to the class.'),
-(6, '1112', 'Go to the class.'),
-(7, '1112', 'Go to the class.');
+(5, '1112', 'Go to the class.');
 
 -- --------------------------------------------------------
 
@@ -120,7 +118,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `type`, `status`) VALUES
-(1, 'Ifti', 'ifti', 'ifti', 'amicable@gmail.com', 'teacher', 'danger');
+(1, 'Ifti', 'ifti', 'ifti', 'amicable@gmail.com', 'teacher', 'success');
 
 --
 -- Indexes for dumped tables
@@ -146,7 +144,7 @@ ALTER TABLE `upload`
 -- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
-  MODIFY `no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

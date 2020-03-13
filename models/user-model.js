@@ -115,7 +115,17 @@ module.exports ={
 			}
 		});
 	},
-	
+	//get= single notice.....
+	getnotice: function(no, callback){
+		var sql = "select * from upload where no=?";
+		db.getResult(sql, [no], function(result){
+			if(result.length > 0){
+				callback(result[0]);
+			}else{
+				callback(null);
+			}
+		});
+	},
     getallstudent:function(callback){
 		var sql = "select * from student";
 		db.getResult(sql, null, function(results){
@@ -167,8 +177,8 @@ module.exports ={
 			}
 		});
 	},
-	delete: function(id, callback){
-		var sql = "delete from user where id=?";
+	deletenotice: function(id, callback){
+		var sql = "delete from upload where id=?";
 		db.execute(sql, [id], function(status){
 			if(status){
 				callback(true);
@@ -189,7 +199,16 @@ module.exports ={
 			}
 		});
 	},
-
+    deletenotice: function(no, callback){
+		var sql = "delete from upload where no=?";
+		db.execute(sql, [no], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
 	updatenotice: function(user, callback){
 		var sql = "update student set ntitle=?,notice=? where id=?";
 		db.execute(sql, [user.ntitle,user.notice,user.id], function(status){
