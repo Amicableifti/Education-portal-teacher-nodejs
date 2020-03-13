@@ -269,6 +269,15 @@ module.exports ={
 				callback(false);
 			}
 		});
-	}
-	
+	},
+	getSearchByID : function(search, id, callback){
+		var sql = "select * from book where (name=? or email=? or cid=?) and id!=?";
+		db.getResults(sql, [search, search, search, email], function(results){
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
 }

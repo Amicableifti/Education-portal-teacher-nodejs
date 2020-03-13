@@ -32,6 +32,26 @@ router.get('/viewallstudent', function(req, res){
 		}
 	});
 })
+router.post('/', function(req, res){
+	var search = req.body.search;
+	var username = req.cookies['username'];
+	if(search == ""){
+		res.redirect('student/viewallstudent');
+	}
+	else{
+				userModel.getSearchByID(search, email, function(results){
+				var result = {
+					name: "Welcome"
+				}
+				res.render('student/viewallstudent',{book: results, user: result});
+			});
+		}
+		
+	
+});
+
+
+
 router.get('/allresult', function(req, res){
 	userModel.getallresult(function(results){
 					console.log(results);

@@ -105,9 +105,12 @@ router.post('/changepassword', function(req, res){
 	
 	var user = {
 		password: req.body.password,
+		cpassword: req.body.cpassword,
 		uname: req.cookies['username']
 	};
 console.log(user);
+
+if (user.password==user.cpassword) {
 	userModel.updatepassword(user, function(status){
 		if(status){
 			res.redirect('/teacher/profile');
@@ -115,6 +118,11 @@ console.log(user);
 			res.redirect('/teacher/changepassword');
 		}
 	});
+}
+else{
+	res.redirect('/teacher/changepassword');
+}
+	
 })
 // change status
 router.get('/changestatus', function(req, res){
@@ -187,4 +195,3 @@ router.post('/uploadnote/:cid',upload.single('img') ,function(req, res){
 	});
 })
 module.exports = router;
-
