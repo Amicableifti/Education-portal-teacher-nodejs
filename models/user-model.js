@@ -115,9 +115,29 @@ module.exports ={
 			}
 		});
 	},
+	getallnote:function(callback){
+		var sql = "select * from uploadenote";
+		db.getResult(sql, null, function(results){
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback(null);
+			}
+		});
+	},
 	//get= single notice.....
 	getnotice: function(no, callback){
 		var sql = "select * from upload where no=?";
+		db.getResult(sql, [no], function(result){
+			if(result.length > 0){
+				callback(result[0]);
+			}else{
+				callback(null);
+			}
+		});
+	},
+	getnote: function(no, callback){
+		var sql = "select * from uploadenote where no=?";
 		db.getResult(sql, [no], function(result){
 			if(result.length > 0){
 				callback(result[0]);
@@ -136,7 +156,7 @@ module.exports ={
 			}
 		});
 	},
-
+    
 	getAll:function(callback){
 		var sql = "select * from user";
 		db.getResult(sql, null, function(results){
@@ -199,8 +219,29 @@ module.exports ={
 			}
 		});
 	},
+	insertnote: function(user, callback){
+		var sql = "insert into uploadenote values(?,?,?)";
+
+		db.execute(sql, [null,user.cid,user.filename], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
     deletenotice: function(no, callback){
 		var sql = "delete from upload where no=?";
+		db.execute(sql, [no], function(status){
+			if(status){
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
+	deletenote: function(no, callback){
+		var sql = "delete from uploadenote where no=?";
 		db.execute(sql, [no], function(status){
 			if(status){
 				callback(true);

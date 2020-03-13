@@ -2,8 +2,17 @@ var express 	= require('express');
 var router 		= express.Router();
 var userModel	= require.main.require('./models/user-model');
 const { check, validationResult } = require('express-validator');
+var multer = require('multer');
 
-
+var storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'uploads/');
+	},
+	filename: (req, file, cb) => {
+		cb(null, Date.now()+'-'+file.originalname);
+	}
+});
+var upload = multer({ storage });
 
 
 
@@ -131,9 +140,6 @@ console.log(user);
 	});
 })
 
-
-
-
 router.get('/upload/:cid', function(req, res){
 	
 	userModel.getByCid(req.params.cid, function(result){
@@ -148,11 +154,35 @@ router.post('/upload/:cid', function(req, res){
 		notice: req.body.notice,
 		cid: req.params.cid
 	};
+	console.log(user);
 	userModel.insertnotice(user, function(status){
 		if(status){
 			res.redirect('../../course/allnotice');
 		}else{
-			res.redirect('/student/upload/'+id);
+			res.redirect('/teacher/upload/'+ req.params.cid);
+		}
+	});
+})
+router.get('/uploadnote/:cid', function(req, res){
+	var rid=req.params.cid; 
+	userModel.getByCid(req.params.cid, function(result){
+  console.log(result);
+		res.render('teacher/uploadnote', {user: result});
+	})
+	
+})
+router.post('/uploadnote/:cid',upload.single('img') ,function(req, res){
+	var filename1= req.file.filename;
+	var user = {
+		filename: filename1,
+		cid: req.params.cid
+	};
+	console.log(user);
+	userModel.insertnote(user, function(status){
+		if(status){
+			res.redirect('../../course/allnote');
+		}else{
+			res.redirect('/teacher/uploadnote/'+ req.params.cid);
 		}
 	});
 })

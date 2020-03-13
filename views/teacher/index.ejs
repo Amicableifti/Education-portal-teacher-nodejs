@@ -208,6 +208,7 @@
       <th scope="col">Sction </th>
       <th scope="col">Time</th>
       <th scope="col">Upload </th>
+       <th scope="col">Upload </th>
       <th scope="col">All Students</th>
 
     </tr>
@@ -222,7 +223,8 @@
        <td><%= userlist[i].ctime %></td>
      
       
-        <td><a href="teacher/upload/<%= userlist[i].cid %>" aria-pressed="true">Upload</a></td>
+        <td><a href="teacher/upload/<%= userlist[i].cid %>" aria-pressed="true">Notice</a></td>
+         <td><a href="teacher/uploadnote/<%= userlist[i].cid %>" aria-pressed="true">Note</a></td>
       <td><a href="student/viewallstudent" aria-pressed="true">View</a></td>
         <!--<a href="/home/edit/<%= userlist[i].id %>">EDIT</a> | 
         <a href="/home/delete/<%= userlist[i].id %>">DELETE</a>  -->

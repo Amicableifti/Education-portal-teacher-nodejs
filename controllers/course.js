@@ -40,6 +40,23 @@ router.post('/deletenotice/:no', function(req, res){
 		}
 	});
 })
+router.get('/deletenote/:no', function(req, res){
+	userModel.getnote(req.params.no, function(result){
+			console.log(result);
+
+		res.render('course/deletenotice', {user: result});
+	});
+})
+router.post('/deletenote/:no', function(req, res){
+	
+	userModel.deletenote(req.params.no, function(status){
+		if(status){
+			res.redirect('/course/allnote');
+		}else{
+			res.redirect('course/deletenote/:'+req.params.no);
+		}
+	});
+})
 ////dletete end
 router.get('/viewallcourse', function(req, res){
 	userModel.getallcourse(function(results){
@@ -54,6 +71,15 @@ router.get('/allnotice', function(req, res){
 	userModel.getallnotice(function(results){
 		if(results.length > 0){
 			res.render('course/allnotice', {userlist: results});
+		}else{
+			res.send('invalid username/password');
+		}
+	});
+})
+router.get('/allnote', function(req, res){
+	userModel.getallnote(function(results){
+		if(results.length > 0){
+			res.render('course/allnote', {userlist: results});
 		}else{
 			res.send('invalid username/password');
 		}

@@ -22,12 +22,12 @@ router.post('/',[
 			username: req.body.uname,
 			password: req.body.password
 		};
- if(req.body.uname == ""){
+ /*if(req.body.uname == ""){
 		res.send("Usernameame con not be empty!");
 	}
 	if(req.body.uname.length >7){
 		res.send("Username can not be more than 6 character long.");
-	}
+	}*/
 var errors = validationResult(req);
 
 		if (!errors.isEmpty()) {
@@ -48,4 +48,3 @@ var errors = validationResult(req);
 });
 
 module.exports = router;
-
